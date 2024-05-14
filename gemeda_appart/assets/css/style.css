@@ -1,0 +1,44 @@
+body{
+    background-color: rgb(186, 219, 250);
+}
+.container-fluide{
+    margin-bottom: 7%;
+}
+.navbar{
+    background-color: rgb(245, 245, 243);
+}
+
+nav li{
+    list-style: none;
+}
+
+li a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 5px;
+}
+li a:hover{
+    background-color: #6f9cdfb9;
+    padding: 7px;
+    text-align: center;
+}
+
+h1, h2{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.indexImg{
+    width: 30%;
+}
+
+.indexImg img{
+    width: 100%;
+}
+
+.ajoutAnnonce{
+    background-color: grey;
+}
