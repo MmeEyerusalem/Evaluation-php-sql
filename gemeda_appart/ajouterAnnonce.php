@@ -7,8 +7,17 @@ if (!empty($_POST)) {
     // debug($_POST);
     
     $postal_code = isset($_POST['postal_code']) ? $_POST['postal_code'] : '';
-
-    $_POST['photo'] = htmlspecialchars($_POST['photo']);
+    // if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+        $photo = $_FILES['photo']['name'];
+        // $chemin_destination = RACINE_SITE . '/assets/img/' . $photo;
+        // move_uploaded_file($_FILES['photo']['tmp_name'], $chemin_destination);
+        move_uploaded_file($_FILES['photo']['tmp_name'], '/assets/img/' . $photo);
+        // debug($_FILES);
+    // } else {
+    //     $photo = null; // or handle the error
+    // }
+    // $_POST['photo'] = htmlspecialchars($_POST['photo']);
+    // $photo = $_FILES['photo']['name'];
     $_POST['title'] = htmlspecialchars($_POST['title']);
     $_POST['description'] = htmlspecialchars($_POST['description']);
     $postal_code =  $_POST['postal_code'];
@@ -24,7 +33,7 @@ if (!empty($_POST)) {
 
         $request= $pdo->prepare($sql);
         $request->execute(array(
-            ':photo' => $_POST['photo'],
+            ':photo' => $_FILES['photo'],
             ':title' => $_POST['title'],
             ':description' => $_POST['description'],
             ':postal_code' => $_POST['postal_code'],
@@ -34,7 +43,7 @@ if (!empty($_POST)) {
             ':reservation_message' => isset($_POST['reservation_message']) ? $_POST['reservation_message'] : NULL,
         )
      );
-    
+    //  move_uploaded_file($_FILES['photo']['tmp_name'], '../assets/img/' . $photo);
 }
 
 
@@ -47,7 +56,7 @@ require_once "inc/header.inc.php";
 <h2>Ajouter une annonce</h2>
 <section class=" ajoutAnnonce">
 
-      <form method="post" action="" class="w-50 mx-auto p-4 mb-4">
+      <form method="post" action="" enctype="multipart/form-data" class="w-50 mx-auto p-4 mb-4">
 
         <div class="p-3 col-sm-12">
             <label for="photo">Photo</label>
